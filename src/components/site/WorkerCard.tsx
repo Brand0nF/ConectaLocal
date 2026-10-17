@@ -11,7 +11,7 @@ export function WorkerCard({ t }: { t: Trabajador }) {
         <div className="min-w-0 flex-1">
           <div className="flex items-center gap-1.5">
             <h3 className="truncate text-lg font-bold">
-              <Link to="/trabajador/$id" params={{ id: String(t.id) }} className="after:absolute hover:underline">
+              <Link to="/trabajador/$id" params={{ id: String(t.id) }} className="hover:underline">
                 {t.nombre}
               </Link>
             </h3>
