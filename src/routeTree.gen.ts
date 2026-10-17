@@ -10,11 +10,25 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as CrearCuentaRouteImport } from './routes/crear-cuenta'
+import { Route as LoginRouteImport } from './routes/login'
 import { Route as OficiosRouteImport } from './routes/oficios'
+import { Route as RestablecerRouteImport } from './routes/restablecer'
+import { Route as TrabajadorIdRouteImport } from './routes/trabajador.$id'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CrearCuentaRoute = CrearCuentaRouteImport.update({
+  id: '/crear-cuenta',
+  path: '/crear-cuenta',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LoginRoute = LoginRouteImport.update({
+  id: '/login',
+  path: '/login',
   getParentRoute: () => rootRouteImport,
 } as any)
 const OficiosRoute = OficiosRouteImport.update({
@@ -22,31 +36,76 @@ const OficiosRoute = OficiosRouteImport.update({
   path: '/oficios',
   getParentRoute: () => rootRouteImport,
 } as any)
+const RestablecerRoute = RestablecerRouteImport.update({
+  id: '/restablecer',
+  path: '/restablecer',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TrabajadorIdRoute = TrabajadorIdRouteImport.update({
+  id: '/trabajador/$id',
+  path: '/trabajador/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/crear-cuenta': typeof CrearCuentaRoute
+  '/login': typeof LoginRoute
   '/oficios': typeof OficiosRoute
+  '/restablecer': typeof RestablecerRoute
+  '/trabajador/$id': typeof TrabajadorIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/crear-cuenta': typeof CrearCuentaRoute
+  '/login': typeof LoginRoute
   '/oficios': typeof OficiosRoute
+  '/restablecer': typeof RestablecerRoute
+  '/trabajador/$id': typeof TrabajadorIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/crear-cuenta': typeof CrearCuentaRoute
+  '/login': typeof LoginRoute
   '/oficios': typeof OficiosRoute
+  '/restablecer': typeof RestablecerRoute
+  '/trabajador/$id': typeof TrabajadorIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/oficios'
+  fullPaths:
+    | '/'
+    | '/crear-cuenta'
+    | '/login'
+    | '/oficios'
+    | '/restablecer'
+    | '/trabajador/$id'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/oficios'
-  id: '__root__' | '/' | '/oficios'
+  to:
+    | '/'
+    | '/crear-cuenta'
+    | '/login'
+    | '/oficios'
+    | '/restablecer'
+    | '/trabajador/$id'
+  id:
+    | '__root__'
+    | '/'
+    | '/crear-cuenta'
+    | '/login'
+    | '/oficios'
+    | '/restablecer'
+    | '/trabajador/$id'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  CrearCuentaRoute: typeof CrearCuentaRoute
+  LoginRoute: typeof LoginRoute
   OficiosRoute: typeof OficiosRoute
+  RestablecerRoute: typeof RestablecerRoute
+  TrabajadorIdRoute: typeof TrabajadorIdRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -58,6 +117,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/crear-cuenta': {
+      id: '/crear-cuenta'
+      path: '/crear-cuenta'
+      fullPath: '/crear-cuenta'
+      preLoaderRoute: typeof CrearCuentaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/login': {
+      id: '/login'
+      path: '/login'
+      fullPath: '/login'
+      preLoaderRoute: typeof LoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/oficios': {
       id: '/oficios'
       path: '/oficios'
@@ -65,12 +138,30 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof OficiosRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/restablecer': {
+      id: '/restablecer'
+      path: '/restablecer'
+      fullPath: '/restablecer'
+      preLoaderRoute: typeof RestablecerRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/trabajador/$id': {
+      id: '/trabajador/$id'
+      path: '/trabajador/$id'
+      fullPath: '/trabajador/$id'
+      preLoaderRoute: typeof TrabajadorIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  CrearCuentaRoute: CrearCuentaRoute,
+  LoginRoute: LoginRoute,
   OficiosRoute: OficiosRoute,
+  RestablecerRoute: RestablecerRoute,
+  TrabajadorIdRoute: TrabajadorIdRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
