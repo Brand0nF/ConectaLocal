@@ -10,15 +10,35 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AdminRouteImport } from './routes/admin'
+import { Route as AyudaRouteImport } from './routes/ayuda'
+import { Route as ComoFuncionaRouteImport } from './routes/como-funciona'
 import { Route as CrearCuentaRouteImport } from './routes/crear-cuenta'
 import { Route as LoginRouteImport } from './routes/login'
+import { Route as MiCuentaRouteImport } from './routes/mi-cuenta'
 import { Route as OficiosRouteImport } from './routes/oficios'
+import { Route as RegistroRouteImport } from './routes/registro'
 import { Route as RestablecerRouteImport } from './routes/restablecer'
 import { Route as TrabajadorIdRouteImport } from './routes/trabajador.$id'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminRoute = AdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AyudaRoute = AyudaRouteImport.update({
+  id: '/ayuda',
+  path: '/ayuda',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ComoFuncionaRoute = ComoFuncionaRouteImport.update({
+  id: '/como-funciona',
+  path: '/como-funciona',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CrearCuentaRoute = CrearCuentaRouteImport.update({
@@ -31,9 +51,19 @@ const LoginRoute = LoginRouteImport.update({
   path: '/login',
   getParentRoute: () => rootRouteImport,
 } as any)
+const MiCuentaRoute = MiCuentaRouteImport.update({
+  id: '/mi-cuenta',
+  path: '/mi-cuenta',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const OficiosRoute = OficiosRouteImport.update({
   id: '/oficios',
   path: '/oficios',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RegistroRoute = RegistroRouteImport.update({
+  id: '/registro',
+  path: '/registro',
   getParentRoute: () => rootRouteImport,
 } as any)
 const RestablecerRoute = RestablecerRouteImport.update({
@@ -49,26 +79,41 @@ const TrabajadorIdRoute = TrabajadorIdRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/admin': typeof AdminRoute
+  '/ayuda': typeof AyudaRoute
+  '/como-funciona': typeof ComoFuncionaRoute
   '/crear-cuenta': typeof CrearCuentaRoute
   '/login': typeof LoginRoute
+  '/mi-cuenta': typeof MiCuentaRoute
   '/oficios': typeof OficiosRoute
+  '/registro': typeof RegistroRoute
   '/restablecer': typeof RestablecerRoute
   '/trabajador/$id': typeof TrabajadorIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/admin': typeof AdminRoute
+  '/ayuda': typeof AyudaRoute
+  '/como-funciona': typeof ComoFuncionaRoute
   '/crear-cuenta': typeof CrearCuentaRoute
   '/login': typeof LoginRoute
+  '/mi-cuenta': typeof MiCuentaRoute
   '/oficios': typeof OficiosRoute
+  '/registro': typeof RegistroRoute
   '/restablecer': typeof RestablecerRoute
   '/trabajador/$id': typeof TrabajadorIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/admin': typeof AdminRoute
+  '/ayuda': typeof AyudaRoute
+  '/como-funciona': typeof ComoFuncionaRoute
   '/crear-cuenta': typeof CrearCuentaRoute
   '/login': typeof LoginRoute
+  '/mi-cuenta': typeof MiCuentaRoute
   '/oficios': typeof OficiosRoute
+  '/registro': typeof RegistroRoute
   '/restablecer': typeof RestablecerRoute
   '/trabajador/$id': typeof TrabajadorIdRoute
 }
@@ -76,34 +121,54 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/admin'
+    | '/ayuda'
+    | '/como-funciona'
     | '/crear-cuenta'
     | '/login'
+    | '/mi-cuenta'
     | '/oficios'
+    | '/registro'
     | '/restablecer'
     | '/trabajador/$id'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/admin'
+    | '/ayuda'
+    | '/como-funciona'
     | '/crear-cuenta'
     | '/login'
+    | '/mi-cuenta'
     | '/oficios'
+    | '/registro'
     | '/restablecer'
     | '/trabajador/$id'
   id:
     | '__root__'
     | '/'
+    | '/admin'
+    | '/ayuda'
+    | '/como-funciona'
     | '/crear-cuenta'
     | '/login'
+    | '/mi-cuenta'
     | '/oficios'
+    | '/registro'
     | '/restablecer'
     | '/trabajador/$id'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AdminRoute: typeof AdminRoute
+  AyudaRoute: typeof AyudaRoute
+  ComoFuncionaRoute: typeof ComoFuncionaRoute
   CrearCuentaRoute: typeof CrearCuentaRoute
   LoginRoute: typeof LoginRoute
+  MiCuentaRoute: typeof MiCuentaRoute
   OficiosRoute: typeof OficiosRoute
+  RegistroRoute: typeof RegistroRoute
   RestablecerRoute: typeof RestablecerRoute
   TrabajadorIdRoute: typeof TrabajadorIdRoute
 }
@@ -115,6 +180,27 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin': {
+      id: '/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AdminRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/ayuda': {
+      id: '/ayuda'
+      path: '/ayuda'
+      fullPath: '/ayuda'
+      preLoaderRoute: typeof AyudaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/como-funciona': {
+      id: '/como-funciona'
+      path: '/como-funciona'
+      fullPath: '/como-funciona'
+      preLoaderRoute: typeof ComoFuncionaRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/crear-cuenta': {
@@ -131,11 +217,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LoginRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/mi-cuenta': {
+      id: '/mi-cuenta'
+      path: '/mi-cuenta'
+      fullPath: '/mi-cuenta'
+      preLoaderRoute: typeof MiCuentaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/oficios': {
       id: '/oficios'
       path: '/oficios'
       fullPath: '/oficios'
       preLoaderRoute: typeof OficiosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/registro': {
+      id: '/registro'
+      path: '/registro'
+      fullPath: '/registro'
+      preLoaderRoute: typeof RegistroRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/restablecer': {
@@ -157,9 +257,14 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AdminRoute: AdminRoute,
+  AyudaRoute: AyudaRoute,
+  ComoFuncionaRoute: ComoFuncionaRoute,
   CrearCuentaRoute: CrearCuentaRoute,
   LoginRoute: LoginRoute,
+  MiCuentaRoute: MiCuentaRoute,
   OficiosRoute: OficiosRoute,
+  RegistroRoute: RegistroRoute,
   RestablecerRoute: RestablecerRoute,
   TrabajadorIdRoute: TrabajadorIdRoute,
 }
