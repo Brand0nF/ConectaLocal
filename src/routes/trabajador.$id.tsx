@@ -133,14 +133,14 @@ function ResenaForm({ trabajadorId, ownerId }: { trabajadorId: number; ownerId: 
 
   async function enviar(e: React.FormEvent) {
     e.preventDefault();
-    if (!estrellas) return toast.error("Elige una calificación de 1 a 5 estrellas");
+    if (!estrellas) return void toast.error("Elige una calificación de 1 a 5 estrellas");
     setSaving(true);
     const { error } = await supabase.from("resenas").upsert(
       { trabajador_id: trabajadorId, usuario_id: user!.id, autor_nombre: perfil?.nombre || "Cliente", estrellas, comentario: comentario.trim().slice(0, 300), creado_en: new Date().toISOString() },
       { onConflict: "trabajador_id,usuario_id" },
     );
     setSaving(false);
-    if (error) return toast.error("No se pudo guardar la reseña");
+    if (error) return void toast.error("No se pudo guardar la reseña");
     toast.success(existe ? "Reseña actualizada" : "¡Gracias por tu reseña!");
     setExiste(true);
     qc.invalidateQueries({ queryKey: ["resenas"] });
@@ -150,7 +150,7 @@ function ResenaForm({ trabajadorId, ownerId }: { trabajadorId: number; ownerId: 
 
   async function borrar() {
     const { error } = await supabase.from("resenas").delete().eq("trabajador_id", trabajadorId).eq("usuario_id", user!.id);
-    if (error) return toast.error("No se pudo eliminar");
+    if (error) return void toast.error("No se pudo eliminar");
     setExiste(false); setEstrellas(0); setComentario("");
     toast.success("Reseña eliminada");
     qc.invalidateQueries();
