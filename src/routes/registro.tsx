@@ -79,7 +79,7 @@ function Registro() {
         <p className="mt-3 text-muted-foreground">Para ofrecer servicios, cambia tu cuenta a trabajador. Podrás seguir buscando servicios.</p>
         <Button className="mt-6" onClick={async () => {
           const { error } = await supabase.from("profiles").update({ tipo: "trabajador" }).eq("id", user.id);
-          if (error) return toast.error("No se pudo cambiar");
+          if (error) return void toast.error("No se pudo cambiar");
           window.location.reload();
         }}>Cambiar a cuenta de trabajador</Button>
       </div>
@@ -88,17 +88,17 @@ function Registro() {
   async function submit(e: React.FormEvent) {
     e.preventDefault();
     const p = schema.safeParse(f);
-    if (!p.success) return toast.error(p.error.issues[0].message);
+    if (!p.success) return void toast.error(p.error.issues[0]?.message ?? "Datos no válidos");
     const wa = normalizarWhatsapp(f.whatsapp);
-    if (!wa) return toast.error("Ingresa un celular válido, ej: 9 1234 5678");
-    if (!consent) return toast.error("Debes aceptar que tu WhatsApp sea visible");
+    if (!wa) return void toast.error("Ingresa un celular válido, ej: 9 1234 5678");
+    if (!consent) return void toast.error("Debes aceptar que tu WhatsApp sea visible");
     setSaving(true);
     let foto_url = foto;
     if (archivo) {
-      if (archivo.size > 2 * 1024 * 1024) { setSaving(false); return toast.error("La foto debe pesar menos de 2 MB"); }
+      if (archivo.size > 2 * 1024 * 1024) { setSaving(false); return void toast.error("La foto debe pesar menos de 2 MB"); }
       const path = `${user!.id}/${Date.now()}.${archivo.type === "image/png" ? "png" : "jpg"}`;
       const { error } = await supabase.storage.from("fotos").upload(path, archivo, { contentType: archivo.type });
-      if (error) { setSaving(false); return toast.error("No se pudo subir la foto"); }
+      if (error) { setSaving(false); return void toast.error("No se pudo subir la foto"); }
       foto_url = path;
     }
     const row = { ...p.data, whatsapp: wa, disponible: f.disponible, foto_url, user_id: user!.id };
@@ -106,7 +106,7 @@ function Registro() {
       ? await supabase.from("trabajadores").update(row).eq("id", existenteId)
       : await supabase.from("trabajadores").insert(row);
     setSaving(false);
-    if (error) return toast.error("No se pudo guardar tu perfil");
+    if (error) return void toast.error("No se pudo guardar tu perfil");
     toast.success(existenteId ? "Perfil actualizado" : "¡Tu perfil ya está publicado!");
     qc.invalidateQueries();
     navigate({ to: "/mi-cuenta" });

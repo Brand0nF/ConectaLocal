@@ -25,11 +25,11 @@ function Restablecer() {
   const [loading, setLoading] = useState(false);
   async function submit(e: React.FormEvent) {
     e.preventDefault();
-    if (password.length < 8) return toast.error("Mínimo 8 caracteres");
+    if (password.length < 8) return void toast.error("Mínimo 8 caracteres");
     setLoading(true);
     const { error } = await supabase.auth.updateUser({ password });
     setLoading(false);
-    if (error) return toast.error("El enlace expiró. Solicita uno nuevo.");
+    if (error) return void toast.error("El enlace expiró. Solicita uno nuevo.");
     toast.success("Contraseña actualizada");
     navigate({ to: "/mi-cuenta" });
   }

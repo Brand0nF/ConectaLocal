@@ -46,7 +46,7 @@ function CrearCuenta() {
   async function submit(e: React.FormEvent) {
     e.preventDefault();
     const p = schema.safeParse(form);
-    if (!p.success) return toast.error(p.error.issues[0].message);
+    if (!p.success) return void toast.error(p.error.issues[0]?.message ?? "Datos no válidos");
     setLoading(true);
     const { data, error } = await supabase.auth.signUp({
       email: p.data.email,
@@ -57,7 +57,7 @@ function CrearCuenta() {
       },
     });
     setLoading(false);
-    if (error) return toast.error(error.message.includes("registered") ? "Ese correo ya tiene una cuenta" : error.message);
+    if (error) return void toast.error(error.message.includes("registered") ? "Ese correo ya tiene una cuenta" : error.message);
     if (!data.session) setEnviado(true);
   }
 

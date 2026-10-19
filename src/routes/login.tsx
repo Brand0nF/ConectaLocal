@@ -47,7 +47,7 @@ function Login() {
     if (modo === "reset") {
       const { error } = await supabase.auth.resetPasswordForEmail(email, { redirectTo: `${window.location.origin}/restablecer` });
       setLoading(false);
-      if (error) return toast.error(error.message);
+      if (error) return void toast.error(error.message);
       toast.success("Te enviamos un correo para restablecer tu contraseña");
       return setModo("login");
     }

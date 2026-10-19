@@ -50,7 +50,7 @@ function Admin() {
     );
 
   const done = (msg: string) => (r: { error: unknown }) => {
-    if (r.error) return toast.error("No se pudo completar la acción");
+    if (r.error) return void toast.error("No se pudo completar la acción");
     toast.success(msg);
     qc.invalidateQueries();
   };

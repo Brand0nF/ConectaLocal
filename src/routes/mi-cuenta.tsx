@@ -49,14 +49,14 @@ function MiCuenta() {
   async function toggle() {
     if (!mio) return;
     const { error } = await supabase.from("trabajadores").update({ disponible: !mio.disponible }).eq("id", mio.id);
-    if (error) return toast.error("No se pudo actualizar");
+    if (error) return void toast.error("No se pudo actualizar");
     toast.success(mio.disponible ? "Ahora apareces como ocupado" : "Ahora apareces como disponible");
     qc.invalidateQueries();
   }
   async function eliminarPerfil() {
-    if (!mio || !confirm("¿Eliminar tu perfil público? Esta acción no se puede deshacer.")) return;
+    if (!mio || !window.confirm("¿Eliminar tu perfil público? Esta acción no se puede deshacer.")) return;
     const { error } = await supabase.from("trabajadores").delete().eq("id", mio.id);
-    if (error) return toast.error("No se pudo eliminar");
+    if (error) return void toast.error("No se pudo eliminar");
     toast.success("Perfil eliminado");
     qc.invalidateQueries();
   }

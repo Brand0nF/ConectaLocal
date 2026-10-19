@@ -2,8 +2,7 @@
 export function normalizarWhatsapp(input: string): string | null {
   const digits = input.replace(/\D/g, "");
   let n = digits;
-  if (n.length === 8) n = "569" + n;
-  else if (n.length === 9 && n.startsWith("9")) n = "56" + n;
+  if (n.length === 9 && n.startsWith("9")) n = "56" + n;
   return /^569\d{8}$/.test(n) ? n : null;
 }
 
