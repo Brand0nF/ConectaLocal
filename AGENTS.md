@@ -12,3 +12,4 @@
 - Public directory data (oficios, sectores, trabajadores, resenas) is read client-side via the browser client + React Query (src/lib/data.ts); writes rely on RLS, so keep authorization in policies.
 - Admin access comes only from public.user_roles (has_role); the signup trigger checks the owner's designated email, never user-editable metadata, to prevent privilege escalation.
 - Worker photos live in the private "fotos" bucket under <user_id>/ and are shown with signed URLs (public buckets are blocked in this workspace).
+- Standalone PHP exports are assembled and tested outside the application tree; the live TanStack app is not replaced because Lovable cannot host PHP/MySQL.
